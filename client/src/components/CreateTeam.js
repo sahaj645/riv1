@@ -46,7 +46,7 @@ export default function CreateTeam({eventName}) {
       [e.target.name]: e.target.value
     });
   };
-axios.defaults.withCredentials = true;
+
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -54,6 +54,7 @@ axios.defaults.withCredentials = true;
       ...formData,
       teamId: randomNumber // Ensure the teamId is updated before submission
     };
+    axios.defaults.withCredentials = true;
     try {
       let response;
       if (eventName==="survival") {
