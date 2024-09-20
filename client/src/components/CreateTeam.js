@@ -57,10 +57,10 @@ export default function CreateTeam({eventName}) {
     try {
       let response;
       if (eventName==="survival") {
-        response = await axios.post('http://localhost:8000/survival', updatedFormData);
+        response = await axios.post('https://tam-gravitas-api.vercel.app/survival', updatedFormData);
       }
       else {
-        response = await axios.post('http://localhost:8000/createCortex', updatedFormData);
+        response = await axios.post('https://tam-gravitas-api.vercel.app/createCortex', updatedFormData);
       }
       console.log('Response:', response.data);
   
