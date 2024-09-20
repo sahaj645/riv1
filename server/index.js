@@ -9,12 +9,16 @@ mongoose.connect('mongodb+srv://gravitastam2024:Sahil%40tam123@cluster0.inn1c.mo
     .catch(err => console.log("DB not connected", err));
 
 app.use(cors({
-    origin: ['https://tam-gravitas-vit.vercel.app'],
+    origin: 'https://tam-gravitas-vit.vercel.app',
     credentials: true
 }));
 
 app.use(express.json());
-app.options('*', cors());
 
 // Routes
 app.use('/', require('./routes/authroutes'));
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
