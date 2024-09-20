@@ -46,7 +46,7 @@ export default function CreateTeam({eventName}) {
       [e.target.name]: e.target.value
     });
   };
-
+axios.defaults.withCredentials = true;
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
