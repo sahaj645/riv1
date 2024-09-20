@@ -9,16 +9,10 @@ mongoose.connect('mongodb+srv://gravitastam2024:Sahil%40tam123@cluster0.inn1c.mo
     .catch(err => console.log("DB not connected", err));
 
 app.use(cors({
-    origin: 'https://tam-gravitas-vit.vercel.app',
+    origin: ['https://tam-gravitas-vit.vercel.app'],
     methods: ['POST','GET'],
     credentials: true
 }));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://tam-gravitas-vit.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
-});
 
 app.use(express.json());
 
