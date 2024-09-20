@@ -20,7 +20,7 @@ export default function JoinTeam({eventName}) {
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-
+axios.defaults.withCredentials = true;
   // Handle input change
   const handleChange = (e) => {
     setFormData({
