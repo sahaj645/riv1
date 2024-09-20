@@ -2,6 +2,7 @@ import bg from "../images/bluegrid.png";
 
 import data_alchemy from "../images/data_alchemy.png";
 import survival from "../images/survival.png";
+import grundfos from "../images/grundfos.png";
 import codecortex from "../images/codecortex.png";
 import { EventCard } from "../components/Card";
 import Contact from "../components/contact";
@@ -37,7 +38,8 @@ export function Home({
         scrollToEventsBig={scrollToEventsBig}
       />
       <div className="w-screen h-60 bg-black flex flex-col items-center text-white">
-        <h2 className="text-4xl md:text-6xl leading-tight">SPONSOR BROs</h2>
+        <h2 className="text-4xl md:text-6xl leading-tight">SPONSORED BY</h2>
+        <img src={grundfos} alt="Sponsor logo" className="mt-4 w-auto h-40" />
       </div>
 
       {/* Large screens: One background div for all cards */}
