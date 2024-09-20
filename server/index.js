@@ -25,7 +25,3 @@ app.use(express.json());
 
 // Routes
 app.use('/', require('./routes/authroutes'));
-
-// Start server
-const port = 8000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
