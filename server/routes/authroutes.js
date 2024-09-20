@@ -9,7 +9,7 @@ const{joinCodeCortex}=require('../controllers/JoinCodeCortexController.js');
 router.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'https://tam-gravitas-vit.vercel.app',
   })
 );
 
