@@ -12,7 +12,7 @@ mongoose.connect('mongodb+srv://gravitastam2024:Sahil%40tam123@cluster0.inn1c.mo
 app.use(express.json());
 app.use(cors({
     credentials: true,
-    origin: 'https://tam-gravitas-vit.vercel.app',
+    origin: ['https://tam-gravitas-vit.vercel.app'],
     methods: ['POST','GET']
 }));
 
