@@ -11,7 +11,7 @@ export default function Nav({
   }
 
   return (
-    <div className="w-screen h-30 bg-black flex justify-center pt-10">
+    <div className="absolute -z-1 w-screen h-20 bg-transparent flex justify-center pt-10">
       <NavbarContainer>
         <NavItem onClick={handleHomeNavigate}>Home</NavItem>
         <NavItem onClick={scrollToEvents}>Events</NavItem>
