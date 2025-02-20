@@ -18,7 +18,7 @@ export function Welcome({ scrollToEventsSmol, scrollToEventsBig }) {
           welcomes you to
         </p>
         <h2 className="text-5xl md:text-7xl leading-snug md:leading-tight">
-          graVITas'24
+          Riviera '2025
         </h2>
         <div className="md:hidden">
           <Button

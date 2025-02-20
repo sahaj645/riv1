@@ -1,24 +1,13 @@
 import bg from "../images/bluegrid.png";
 import { Button } from "./Button";
 import Modal from "./Modal";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function CreateTeam({ eventName }) {
+export default function JoinTeam({ eventName }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [randomNumber, setRandomNumber] = useState("");
-
-  // Generate random 5-digit number on component mount
-  useEffect(() => {
-    const generateRandomNumber = () => {
-      const number = Math.floor(10000 + Math.random() * 90000).toString(); // Generate 5-digit number
-      setRandomNumber(number);
-    };
-
-    generateRandomNumber();
-  }, []);
 
   const [formData, setFormData] = useState({
     ParticipantName: "",
@@ -26,20 +15,13 @@ export default function CreateTeam({ eventName }) {
     VITEmail: "",
     teamId: "",
     TeamName: "",
-    teamStrength: null,
+    teamStrength: "",
   });
-
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      teamId: randomNumber, // Update teamId when randomNumber changes
-    }));
-  }, [randomNumber]);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+  axios.defaults.withCredentials = true;
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -47,35 +29,21 @@ export default function CreateTeam({ eventName }) {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-    const updatedFormData = {
-      ...formData,
-      teamId: randomNumber, // Ensure the teamId is updated before submission
-    };
-    axios.defaults.withCredentials = true;
+    event.preventDefault();
     try {
       let response;
       if (eventName === "survival") {
-        response = await axios.post(
-          "https://tam-gravitas-api.vercel.app/survival",
-          updatedFormData
-        );
+        response = await axios.post("https://tam-gravitas-api.vercel.app/joinTeam", formData);
       } else {
-        response = await axios.post(
-          "https://tam-gravitas-api.vercel.app/createCortex",
-          updatedFormData
-        );
+        response = await axios.post("https://tam-gravitas-api.vercel.app/joinCortex", formData);
       }
       console.log("Response:", response.data);
 
-      if (response.status === 201) {
-        toast.success(response.data.message);
+      if (response.status === 200) {
+        toast.success("Form submitted successfully!");
       } else if (response.status === 400) {
         toast.error(response.data.error);
-      } else if (response.status === 500) {
-        toast.error(response.data.message);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -85,15 +53,11 @@ export default function CreateTeam({ eventName }) {
         toast.error("An error occurred. Please try again.");
       }
     } finally {
-      // Reset the form fields after showing the toast (success or error)
-      const newRandomNumber = Math.floor(10000 + Math.random() * 90000).toString();
-      setRandomNumber(newRandomNumber);
-
       setFormData({
         ParticipantName: "",
         RegNo: "",
         VITEmail: "",
-        teamId: newRandomNumber,
+        teamId: "",
         TeamName: "",
         teamStrength: "",
       });
@@ -103,25 +67,33 @@ export default function CreateTeam({ eventName }) {
   return (
     <>
       <div
-        className="w-full h-screen  bg-cover bg-center flex flex-col items-center text-white"
+        className="w-full min-h-screen bg-black bg-cover bg-center flex flex-col items-center text-white"
         style={{ backgroundImage: `url(${bg})` }}
       >
-        <div className="w-11/12 md:w-4/5 lg:w-4/6 bg-cardbg bg-opacity-70 mt-8 md:mt-12 p-4 flex flex-col items-center rounded-lg">
+        <div
+          className="w-11/12 md:w-4/5 lg:w-4/6 bg-cardbg bg-opacity-70 mt-8 md:mt-12 p-4 flex flex-col items-center rounded-lg"
+          style={{
+            boxShadow: "0 0 10px 1px rgba(138, 30, 30, 0.7)",
+          }}
+        >
           <form className="w-full max-w-3xl">
             <div className="flex flex-col md:flex-row mb-4 md:mb-6 p-3 mx-1">
-              <div className="flex p-2 font-normal h-10 flex-1 mb-4 items-center justify-center md:mb-0 md:mr-2 md:justify-normal">
-                <span className="p-2 rounded-xl text-white">Team ID:</span>
-                <span className="mx-3 border-b border-white text-white">
-                  {randomNumber}
-                </span>
-              </div>
+              <input
+                type="text"
+                placeholder="Team ID"
+                name="teamId"
+                value={formData.teamId}
+                onChange={handleChange}
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 mb-4 md:mb-0 md:mr-2 focus:bg-transparent focus:text-white active:bg-transparent"
+                required
+              />
               <input
                 type="number"
                 placeholder="No. of Team Members"
                 name="teamStrength"
                 value={formData.teamStrength}
                 onChange={handleChange}
-                className="bg-transparent border-b border-solid border-white placeholder:text-white font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2"
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2 focus:bg-transparent focus:text-white active:bg-transparent"
                 required
               />
             </div>
@@ -132,7 +104,7 @@ export default function CreateTeam({ eventName }) {
                 name="ParticipantName"
                 value={formData.ParticipantName}
                 onChange={handleChange}
-                className="bg-transparent border-b border-solid border-white placeholder:text-white font-extralight p-2 md:p-4 h-10 flex-1 mb-4 md:mb-0 md:mr-2"
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 mb-4 md:mb-0 md:mr-2 focus:bg-transparent focus:text-white active:bg-transparent"
                 required
               />
               <input
@@ -141,7 +113,7 @@ export default function CreateTeam({ eventName }) {
                 name="RegNo"
                 value={formData.RegNo}
                 onChange={handleChange}
-                className="bg-transparent border-b border-solid border-white placeholder:text-white font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2"
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2 focus:bg-transparent focus:text-white active:bg-transparent"
                 required
               />
             </div>
@@ -152,7 +124,7 @@ export default function CreateTeam({ eventName }) {
                 name="VITEmail"
                 value={formData.VITEmail}
                 onChange={handleChange}
-                className="bg-transparent border-b border-solid border-white placeholder:text-white font-extralight p-2 md:p-4 h-10 flex-1 mb-4 md:mb-0 md:mr-2"
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 mb-4 md:mb-0 md:mr-2 focus:bg-transparent focus:text-white active:bg-transparent"
                 required
               />
               <input
@@ -161,7 +133,7 @@ export default function CreateTeam({ eventName }) {
                 name="TeamName"
                 value={formData.TeamName}
                 onChange={handleChange}
-                className="bg-transparent border-b border-solid border-white placeholder:text-white font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2"
+                className="bg-transparent border-b border-solid border-red-600 placeholder:text-red-400 font-extralight p-2 md:p-4 h-10 flex-1 md:ml-2 focus:bg-transparent focus:text-white active:bg-transparent"
                 required
               />
             </div>
@@ -170,22 +142,17 @@ export default function CreateTeam({ eventName }) {
               <button
                 type="button"
                 onClick={handleOpenModal}
-                className="bg-[#8a1e1eb3] font-light px-4 py-2 rounded-md transform transition-transform duration-300 hover:-translate-y-2 text-white mx-3"
+                className="bg-gradient-to-r from-red-800 to-red-600 font-light px-4 py-2 rounded-md transform transition-transform duration-300 hover:-translate-y-2 text-white mx-3"
               >
                 How to Fill?
               </button>
               <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
-              <Button
-                what="Submit"
-                extras="mx-3 bg-[#8a1e1eb3]"
-                onClick={handleSubmit}
-              />
+              <Button what="Submit" extras="mx-3" onClick={handleSubmit} />
             </div>
           </form>
           <ToastContainer />
         </div>
       </div>
     </>
-    
   );
 }

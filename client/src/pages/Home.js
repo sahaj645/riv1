@@ -1,6 +1,6 @@
 import bg from "../images/bluegrid.png";
 import survival from "../images/survival.png";
-import grundfos from "../images/grundfos.png";
+// import grundfos from "../images/grundfos.png";
 import { EventCard } from "../components/Card";
 import Contact from "../components/contact";
 import { Welcome } from "../components/Welcome";
@@ -35,10 +35,10 @@ export function Home({
         scrollToEventsSmol={scrollToEventsSmol}
         scrollToEventsBig={scrollToEventsBig}
       />
-      <div className="w-screen h-60 bg-black flex flex-col items-center text-white">
+      {/* <div className="w-screen h-60 bg-black flex flex-col items-center text-white">
         <h2 className="text-4xl md:text-6xl leading-tight">SPONSORED BY</h2>
         <img src={grundfos} alt="Sponsor logo" className="mt-4 w-auto h-40" />
-      </div>
+      </div> */}
 
       {/* Large screens */}
       <div>
