@@ -67,7 +67,7 @@ export default function JoinTeam({ eventName }) {
   return (
     <>
       <div
-        className="w-full min-h-screen bg-black bg-cover bg-center flex flex-col items-center text-white"
+        className="w-full h-screen bg-black bg-cover bg-center flex flex-col items-center text-white"
         style={{ backgroundImage: `url(${bg})` }}
       >
         <div

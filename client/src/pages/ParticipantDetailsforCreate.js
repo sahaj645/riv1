@@ -35,15 +35,15 @@ export default function ParticipantDetailsforCreate({
       {/* Main content */}
       <div className="w-screen h-screen bg-black bg-cover bg-center pt-[100px]">
   {/* Added padding-top to prevent overlap */}
-  <div className="flex flex-col items-center text-white"> {/* Changed text-red\-600 to text-white */}
-    {/* Updated "Create Your Team" text */}
-    <h1 className="text-5xl md:text-7xl font-bold leading-tight mt-14 text-center">
-      Create Your Team
-    </h1>
-    {/* CreateTeam component */}
-    <CreateTeam eventName={eventName} />
-  </div>
-</div>
+    <div className="flex flex-col items-center text-white"> {/* Changed text-red\-600 to text-white */}
+      {/* Updated "Create Your Team" text */}
+      <h1 className="text-5xl md:text-7xl font-bold leading-tight mt-14 text-center">
+          Create Your Team
+      </h1>
+      {/* CreateTeam component */}
+        <CreateTeam eventName={eventName} />
+      </div>
+    </div>
 
       {/* Footer */}
       <Footer />
