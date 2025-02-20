@@ -45,7 +45,6 @@ export default function ParticipantDetailsforCreate({
   </div>
 </div>
 
-
       {/* Footer */}
       <Footer />
     </>
