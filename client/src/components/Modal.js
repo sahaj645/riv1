@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
 const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
@@ -19,27 +19,26 @@ const Modal = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 "
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={onClose}
     >
       <div
-        className="flex-col justify-center items-center bg-gray-900 text-white p-6 max-w-md w-full rounded-2xl"
+        className="flex-col justify-center items-center bg-900 text-white p-6 max-w-md w-full rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {" "}
-        <h1>How to fill?</h1> <br />
+        <h1>How to fill?</h1>
+        <br />
         <ol className="list-decimal list-inside space-y-2 font-light">
           <li>Fill up all the details mentioned.</li>
           <li>All the teammates should fill up the same team name and ID.</li>
           <li>Team size: 2-4 members.</li>
           <li>After filling up all the details, click 'Submit'.</li>
-        
-          <li> YAY! You’re registered.</li>
+          <li>YAY! You’re registered.</li>
         </ol>
         <center>
           <button
             onClick={onClose}
-            className="mt-6 bg-gradient-to-r from-start to-end font-light px-4 py-2 rounded-md  transform transition-transform duration-300 hover:-translate-y-2 text-white"
+            className="mt-6 bg-red-700 font-light px-4 py-2 rounded-md transform transition-transform duration-300 hover:bg-red-800 hover:-translate-y-2 text-white"
           >
             Close
           </button>
