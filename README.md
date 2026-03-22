@@ -146,7 +146,7 @@ MIT License
 ## Author
 
 Sahaj Gaur
-Backend Lead – TAM AI & ML Club
+Web Lead – TAM AI & ML Club
 Full Stack Developer
 
 ---
